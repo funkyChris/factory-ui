@@ -21,6 +21,8 @@
 package org.qualipso.factory.ui.core.login.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * User interface for the Login core service..
@@ -39,6 +41,6 @@ public class Login implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-        
+        RootPanel.get("loginComponent").add(new Label("coucou"));
     }
 }

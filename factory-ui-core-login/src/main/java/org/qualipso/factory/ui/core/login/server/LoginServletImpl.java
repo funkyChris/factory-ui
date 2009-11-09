@@ -48,7 +48,6 @@ public class LoginServletImpl extends RemoteServiceServlet implements LoginServl
      * @param password       the password
      * @return                       true if the user information allow him to log in, false otherwise
      */
-    @Override
     public Boolean login(String username, String password) {
         Boolean loggedIn = false;
         
