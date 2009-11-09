@@ -21,6 +21,8 @@
 package org.qualipso.factory.ui.core.login.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -33,6 +35,8 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class Login implements EntryPoint {
     
+    private final LoginServletAsync loginServlet = GWT.create(LoginServlet.class);
+    
     /**
      * Entry point, method called when the module is loaded.
      * Set up the form in the element of id "login".
@@ -41,6 +45,17 @@ public class Login implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-        RootPanel.get("loginComponent").add(new Label("coucou"));
+        final Label label = new Label();
+        loginServlet.login("usernameTest", "passwordTest", new AsyncCallback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean logged) {
+                label.setText("logged = " + logged);
+            }
+            @Override
+            public void onFailure(Throwable ex) {
+                label.setText("Problem trying to log in: " + ex);
+            }
+        });
+        RootPanel.get("loginComponent").add(label);
     }
 }
