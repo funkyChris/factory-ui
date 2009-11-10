@@ -7,6 +7,7 @@
 <module rename-to='login'>
 	<inherits name='com.google.gwt.user.User' />
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
+	<inherits name="com.google.gwt.uibinder.UiBinder" />
 
 	<source path='client' />
 	<entry-point class='org.qualipso.factory.ui.core.login.client.Login' />

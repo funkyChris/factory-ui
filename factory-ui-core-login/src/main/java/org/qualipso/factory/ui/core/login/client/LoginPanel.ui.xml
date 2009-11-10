@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://google-web-toolkit.googlecode.com/files/xhtml.ent">
+	<!--
+		Authors Jerome Blanchard <jayblanc@gmail.com> - Christophe Bouthier <christophe.bouthier@loria.fr> 
+		Date 6 November 2009
+	-->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<g:VerticalPanel>
+		<g:HorizontalPanel>
+			<g:Label text="Login" />
+			<g:TextBox ui:field='usernameTextBox' />
+		</g:HorizontalPanel>
+		<g:HorizontalPanel>
+			<g:Label text="Password" />
+			<g:PasswordTextBox ui:field='passwordTextBox'/>
+		</g:HorizontalPanel>
+	</g:VerticalPanel>
+
+</ui:UiBinder> 
