@@ -3,9 +3,7 @@
 		Authors Jerome Blanchard <jayblanc@gmail.com> - Christophe Bouthier <christophe.bouthier@loria.fr> 
 		Date 6 November 2009
 	-->
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>factory-ui-parent</artifactId>
         <groupId>org.qualipso</groupId>
@@ -134,6 +132,13 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>org.jboss.jbossas</groupId>
+            <artifactId>jboss-as-client</artifactId>
+            <version>5.0.1.GA</version>
+            <type>pom</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-servlet</artifactId>
             <version>${gwt.version}</version>
@@ -144,6 +149,12 @@
             <artifactId>gwt-user</artifactId>
             <version>${gwt.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.qualipso</groupId>
+            <artifactId>factory-core</artifactId>
+            <version>0.3.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

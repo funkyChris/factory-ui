@@ -22,39 +22,48 @@ package org.qualipso.factory.ui.core.login.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
- * User interface for the Login core service.
- * Provide a user form for login and password, and call the Login servlet to check the login.
+ * User interface for the Login core service. Provide a user form for login and password, and call the Login servlet to check the login.
  * 
  * @author <a href="mailto:christophe.bouthier@loria.fr">Christophe Bouthier</a>
  * @date 6 November 2009
  */
 public class Login implements EntryPoint {
-    
-//    private final LoginServletAsync loginServlet = GWT.create(LoginServlet.class);
-    
+
+    private final LoginServletAsync loginServlet = GWT.create(LoginServlet.class);
+
     /**
-     * Entry point, method called when the module is loaded.
-     * Set up the form in the element of id "login".
+     * Entry point, method called when the module is loaded. Set up the form in the element of id "login".
      * 
      * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
      */
     @Override
     public void onModuleLoad() {
-//        final Label label = new Label();
-//        loginServlet.login("usernameTest", "passwordTest", new AsyncCallback<Boolean>() {
-//            @Override
-//            public void onSuccess(Boolean logged) {
-//                label.setText("logged = " + logged);
-//            }
-//            @Override
-//            public void onFailure(Throwable ex) {
-//                label.setText("Problem trying to log in: " + ex);
-//            }
-//        });
-//        RootPanel.get("loginComponent").add(label);
-        RootPanel.get("loginComponent").add(new LoginPanel());
+        RootPanel.get("loginComponent").add(new LoginPanel(this));
     }
+
+    
+    /**
+     * Do the real login through the servlet.
+     * 
+     * @param username      the username
+     * @param password       the password
+     */
+    public void login(String username, String password) {
+        loginServlet.login(username, password, new AsyncCallback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean logged) {
+                GWT.log("success !!!", null);
+            }
+
+            @Override
+            public void onFailure(Throwable ex) {
+                GWT.log("failure !!!", null);
+            }
+        });
+    }
+
 }

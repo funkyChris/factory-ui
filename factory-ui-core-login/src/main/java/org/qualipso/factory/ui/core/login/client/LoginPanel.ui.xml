@@ -16,6 +16,7 @@
 			<g:Label text="Password" />
 			<g:PasswordTextBox ui:field='passwordTextBox'/>
 		</g:HorizontalPanel>
+        <g:Button text='Login' ui:field='loginButton' />
 	</g:VerticalPanel>
 
 </ui:UiBinder> 

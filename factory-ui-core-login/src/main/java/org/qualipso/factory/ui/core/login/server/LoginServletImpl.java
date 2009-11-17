@@ -20,8 +20,22 @@
  */
 package org.qualipso.factory.ui.core.login.server;
 
+import java.util.Properties;
+
+import javax.ejb.EJBAccessException;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.security.auth.login.LoginContext;
+import javax.security.auth.login.LoginException;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jboss.security.auth.callback.UsernamePasswordHandler;
+import org.qualipso.factory.FactoryNamingConvention;
+import org.qualipso.factory.membership.MembershipService;
+import org.qualipso.factory.membership.MembershipServiceException;
 import org.qualipso.factory.ui.core.login.client.LoginServlet;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -49,12 +63,60 @@ public class LoginServletImpl extends RemoteServiceServlet implements LoginServl
      * @return                       true if the user information allow him to log in, false otherwise
      */
     public Boolean login(String username, String password) {
-        Boolean loggedIn = false;
-        
         logger.info("User " + username + " trying to log on the factory...");
+
+        // get the naming context for lookup factory services
+        final Context namingContext;
+        try {
+            final Properties properties = new Properties();
+            properties.put("java.naming.factory.initial","org.jnp.interfaces.NamingContextFactory");
+            properties.put("java.naming.factory.url.pkgs","org.jboss.naming:org.jnp.interfaces");
+            properties.put("java.naming.provider.url","localhost:1099");
+            namingContext = new InitialContext(properties);
+        } catch (NamingException ne) {
+            logger.error("Cannot manage to access Factory through naming. Caused by: ", ne);
+            return false;
+        }
         
-        logger.info("Login failed for user " + username);
-        return loggedIn;
+        // get the membership service
+        final MembershipService membership;
+        try {
+            membership = (MembershipService) namingContext.lookup(FactoryNamingConvention.getJNDINameForService("MembershipService"));
+        } catch (NamingException ne) {
+            logger.error("Cannot manage to access Factory membership service. Caused by: ", ne);
+            return false;
+        }
+        
+        // test if the login context is valid by trying to call the membership service
+        LoginContext loginContext;
+        try {
+            loginContext = new LoginContext("qualipso", new UsernamePasswordHandler(username, password));
+            loginContext.login();
+        } catch (LoginException le) {
+            logger.error("Cannot manage to use the login context. Caused by: ", le);
+            return false;
+        }
+        
+        final String profilePath;
+        try {
+            profilePath = membership.getProfilePathForConnectedIdentifier();
+            logger.info("Profile path for user "  + username + ": " + profilePath);
+        } catch (MembershipServiceException e) {
+            logger.error("Cannot manage to call Factory membership service. Caused by: ", e);
+            return false;
+        } catch (EJBAccessException no) {
+            // login is invalid
+            logger.info("Login failed for user " + username);
+            return false;
+        }
+        
+        // if we're here, the login is valid. Put it in the session.
+        HttpSession session =  getThreadLocalRequest().getSession();
+        session.setAttribute("username", username);
+        session.setAttribute("password", password);
+        logger.info("User " + username + " logged in, with profile path " + profilePath);
+        
+        return true;
     }
     
 }
