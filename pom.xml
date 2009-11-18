@@ -17,6 +17,6 @@
 	<packaging>pom</packaging>
 	<version>0.1-SNAPSHOT</version>
 	<properties>
-		<gwt.version>2.0.0-ms2</gwt.version>
+		<gwt.version>2.0.0-rc1</gwt.version>
 	</properties>
 </project>

@@ -27,6 +27,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -42,6 +43,7 @@ public class LoginPanel extends Composite implements ClickHandler {
     interface MyUiBinder extends UiBinder<VerticalPanel, LoginPanel> {}
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
     
+    @UiField Label errorLabel;
     @UiField TextBox usernameTextBox;
     @UiField PasswordTextBox passwordTextBox;
     @UiField Button loginButton;
@@ -57,6 +59,10 @@ public class LoginPanel extends Composite implements ClickHandler {
     @Override
     public void onClick(ClickEvent arg0) {
         loginManager.login(usernameTextBox.getText(), passwordTextBox.getText());
+    }
+
+    public void error(String errorMessage) {
+        errorLabel.setText(errorMessage);
     }
     
 }

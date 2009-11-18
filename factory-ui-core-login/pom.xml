@@ -153,7 +153,7 @@
         <dependency>
             <groupId>org.qualipso</groupId>
             <artifactId>factory-core</artifactId>
-            <version>0.3.2</version>
+            <version>0.3.3-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

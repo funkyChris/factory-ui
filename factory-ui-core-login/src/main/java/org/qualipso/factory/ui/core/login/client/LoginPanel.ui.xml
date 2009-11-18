@@ -8,12 +8,13 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
 	<g:VerticalPanel>
-		<g:HorizontalPanel>
-			<g:Label text="Login" />
+        <g:Label text='Please log in' ui:field='errorLabel' />
+        <g:HorizontalPanel>
+			<g:Label text='Login' />
 			<g:TextBox ui:field='usernameTextBox' />
 		</g:HorizontalPanel>
 		<g:HorizontalPanel>
-			<g:Label text="Password" />
+			<g:Label text='Password' />
 			<g:PasswordTextBox ui:field='passwordTextBox'/>
 		</g:HorizontalPanel>
         <g:Button text='Login' ui:field='loginButton' />

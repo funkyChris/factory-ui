@@ -34,6 +34,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jboss.security.auth.callback.UsernamePasswordHandler;
 import org.qualipso.factory.FactoryNamingConvention;
+import org.qualipso.factory.bootstrap.BootstrapService;
+import org.qualipso.factory.bootstrap.BootstrapServiceException;
 import org.qualipso.factory.membership.MembershipService;
 import org.qualipso.factory.membership.MembershipServiceException;
 import org.qualipso.factory.ui.core.login.client.LoginServlet;
@@ -78,10 +80,23 @@ public class LoginServletImpl extends RemoteServiceServlet implements LoginServl
             return false;
         }
         
+        // get the bootstrap and call it
+        BootstrapService bootstrap;
+        try {
+            bootstrap = (BootstrapService) namingContext.lookup(FactoryNamingConvention.getJNDINameForService("bootstrap"));
+            bootstrap.bootstrap();
+        } catch (NamingException ne) {
+            logger.error("Cannot manage to access Factory bootstrap service. Caused by: ", ne);
+            return false;
+        } catch (BootstrapServiceException bse) {
+            logger.error("Cannot manage to call Factory bootstrap service. Caused by: ", bse);
+            return false;
+        }
+        
         // get the membership service
         final MembershipService membership;
         try {
-            membership = (MembershipService) namingContext.lookup(FactoryNamingConvention.getJNDINameForService("MembershipService"));
+            membership = (MembershipService) namingContext.lookup(FactoryNamingConvention.getJNDINameForService("membership"));
         } catch (NamingException ne) {
             logger.error("Cannot manage to access Factory membership service. Caused by: ", ne);
             return false;
