@@ -134,4 +134,8 @@ public class LoginServletImpl extends RemoteServiceServlet implements LoginServl
         return true;
     }
     
+    public int maMethod() {
+        return 1;
+    }
+    
 }

@@ -10,6 +10,7 @@
 	<inherits name="com.google.gwt.uibinder.UiBinder" />
 
 	<source path='client' />
+    
 	<entry-point class='org.qualipso.factory.ui.core.login.client.Login' />
     
      <set-property name="user.agent" value="gecko" />
