@@ -18,10 +18,9 @@
  *  Jérôme Blanchard / INRIA
  * Christophe Bouthier / INRIA
  */
-package org.qualipso.factory.test.ui.core.login.client;
+package org.qualipso.factory.test.ui.core.login.client.js.tests;
 
 import org.qualipso.factory.ui.core.login.client.Login;
-import org.qualipso.factory.ui.core.login.client.LoginPanel;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -39,17 +38,15 @@ public class GwtTestLogin extends GWTTestCase {
      */
     @Override
     public String getModuleName() {
-        return "org.qualipso.factory.test.ui.core.login.LoginTest";
+        return "org.qualipso.factory.test.ui.core.login.client.js.LoginTest";
     }
 
     /**
      * Simple test.
      */
-    public void testSimple() {
+    public void testMethodInJS() {
         Login loginManager = new Login();
-        LoginPanel panel = new LoginPanel(loginManager);
-        panel.error("testMessage");
-        assertEquals("testMessage", panel.getError());
+        assertEquals(1, loginManager.methodToTestInJS());
     }
     
 }

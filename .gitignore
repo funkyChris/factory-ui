@@ -5,3 +5,5 @@
 build
 target
 war
+www-test
+tomcat

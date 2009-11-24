@@ -7,5 +7,5 @@
 <module>
 	<inherits name="org.qualipso.factory.ui.core.login.Login" />
     
-	<source path="client"/>
+	<source path="tests"/>
 </module>

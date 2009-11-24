@@ -63,8 +63,5 @@ public class LoginPanel extends Composite {
     public void error(String errorMessage) {
         errorLabel.setText(errorMessage);
     }
-    
-    public String getError() {
-        return errorLabel.getText();
-    }
+ 
 }

@@ -136,6 +136,12 @@
     </build>
     <dependencies>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.7</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.1.1</version>
@@ -166,12 +172,6 @@
             <artifactId>factory-core</artifactId>
             <version>0.3.3</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-        	<groupId>junit</groupId>
-        	<artifactId>junit</artifactId>
-        	<version>4.7</version>
-        	<scope>test</scope>
         </dependency>
     </dependencies>
 </project>

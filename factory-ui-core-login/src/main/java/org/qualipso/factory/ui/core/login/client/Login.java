@@ -95,4 +95,12 @@ public class Login implements EntryPoint {
         });
     }
 
+    public int methodToTestInJava() {
+        return  1;
+    }
+    
+    public native int methodToTestInJS() /*-{
+        return 1;
+    }-*/;
+    
 }
