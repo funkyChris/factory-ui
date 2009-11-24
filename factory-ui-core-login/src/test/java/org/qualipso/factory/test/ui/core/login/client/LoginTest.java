@@ -1,4 +1,4 @@
-package org.qualipso.factory.test.ui.core.login.client.java;
+package org.qualipso.factory.test.ui.core.login.client;
 
 import static org.junit.Assert.assertTrue;
 

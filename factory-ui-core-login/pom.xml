@@ -37,7 +37,6 @@
                     <disableClassMetadata>true</disableClassMetadata>
                     <style>PRETTY</style>
                     <runTarget>index.html</runTarget>
-                    <includes>**/GwtTest*.java</includes>
                 </configuration>
                 <executions>
                     <execution>
