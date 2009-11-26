@@ -41,4 +41,9 @@ public interface LoginServlet extends RemoteService {
      * @return                       true if the user information allow him to log in, false otherwise
      */
     Boolean login(String username, String password);
+    
+    /**
+     * Log out from the session.
+     */
+    void logout();
 }
