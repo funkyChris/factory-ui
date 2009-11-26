@@ -43,7 +43,7 @@ public class LoginPanel extends Composite {
     interface MyUiBinder extends UiBinder<VerticalPanel, LoginPanel> {}
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
     
-    @UiField public Label errorLabel;
+    @UiField Label errorLabel;
     @UiField TextBox usernameTextBox;
     @UiField PasswordTextBox passwordTextBox;
     @UiField Button loginButton;
