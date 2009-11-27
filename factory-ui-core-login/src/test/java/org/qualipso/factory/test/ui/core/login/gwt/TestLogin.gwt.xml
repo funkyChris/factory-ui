@@ -8,5 +8,5 @@
     <inherits name="com.google.gwt.user.User" />
     <inherits name="org.qualipso.factory.ui.core.login.Login" />
     
-    <source path="gwttests" />
+    <source path="tests" />
 </module>

@@ -44,7 +44,8 @@
                 <version>2.4.3</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/GwtTest*.java</exclude>
+                        <exclude>**/*TestGwt.java</exclude>
+                        <exclude>**/Gwt*Suite.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -81,11 +82,17 @@
                                         <exclude name="**/*.java" />
                                         <include name="**/*" />
                                     </fileset>
+                                    <fileset dir="src/test/java" casesensitive="yes">
+                                        <exclude name="**/*.gwt.xml" />
+                                        <exclude name="**/*.java" />
+                                        <include name="**/*" />
+                                    </fileset>
                                 </copy>
                                 <copy todir="war/WEB-INF/classes" overwrite="true">
                                     <fileset dir="target/classes" casesensitive="yes">
                                         <exclude name="META-INF/**" />
-                                        <exclude name="**/GwtTest*.class" />
+                                        <exclude name="**/*TestGwt.class" />
+                                        <exclude name="**/Gwt*Suite.class" />
                                         <include name="**/*" />
                                     </fileset>
                                 </copy>

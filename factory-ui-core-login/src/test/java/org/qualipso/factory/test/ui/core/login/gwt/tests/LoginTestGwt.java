@@ -18,7 +18,7 @@
  *  Jérôme Blanchard / INRIA
  * Christophe Bouthier / INRIA
  */
-package org.qualipso.factory.test.ui.core.login.gwt.gwttests;
+package org.qualipso.factory.test.ui.core.login.gwt.tests;
 
 import org.qualipso.factory.ui.core.login.client.Login;
 
@@ -30,7 +30,7 @@ import com.google.gwt.junit.client.GWTTestCase;
  * @author <a href="mailto:christophe.bouthier@loria.fr">Christophe Bouthier</a>
  * @date 23 November 2009
  */
-public class GwtTestLogin extends GWTTestCase {
+public class LoginTestGwt extends GWTTestCase {
 
     /**
      * Return the name of the tested GWT Module.
