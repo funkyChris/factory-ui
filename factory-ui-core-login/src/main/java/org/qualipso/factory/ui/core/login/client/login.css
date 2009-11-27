@@ -1,0 +1,7 @@
+@sprite .logo {
+  gwt-image: 'logo';
+}
+
+.errorLabel {
+  color: red;
+}

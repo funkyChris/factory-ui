@@ -22,6 +22,7 @@ package org.qualipso.factory.ui.core.login.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -43,10 +44,16 @@ public class LoginPanel extends Composite {
     interface MyUiBinder extends UiBinder<VerticalPanel, LoginPanel> {}
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
     
+    interface LoginStyle extends CssResource {
+        String errorLabel();
+        String logo();
+    }
+    
     @UiField Label errorLabel;
     @UiField TextBox usernameTextBox;
     @UiField PasswordTextBox passwordTextBox;
     @UiField Button loginButton;
+    @UiField LoginStyle loginStyle;
     
     private Login loginManager;
     
@@ -62,6 +69,7 @@ public class LoginPanel extends Composite {
 
     public void error(String errorMessage) {
         errorLabel.setText(errorMessage);
+        errorLabel.addStyleName(loginStyle.errorLabel());
     }
  
 }
