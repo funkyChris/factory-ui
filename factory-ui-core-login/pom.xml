@@ -18,15 +18,6 @@
         <finalName>factory-ui-core-login</finalName>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/compile-report/**</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <version>1.2-SNAPSHOT</version>
@@ -87,13 +78,14 @@
                                 <copy todir="war/WEB-INF/classes" overwrite="true">
                                     <fileset dir="src/main/java" casesensitive="yes">
                                         <exclude name="**/*.gwt.xml" />
-                                        <include name="**/*" />
                                         <exclude name="**/*.java" />
+                                        <include name="**/*" />
                                     </fileset>
                                 </copy>
                                 <copy todir="war/WEB-INF/classes" overwrite="true">
                                     <fileset dir="target/classes" casesensitive="yes">
                                         <exclude name="META-INF/**" />
+                                        <exclude name="**/GwtTest*.class" />
                                         <include name="**/*" />
                                     </fileset>
                                 </copy>

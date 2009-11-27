@@ -53,12 +53,13 @@ public class Login implements EntryPoint {
         RootPanel.get("loginComponent").add(loginPanel);
     }
 
-    
     /**
      * Do the real login through the servlet.
      * 
-     * @param username      the username
-     * @param password       the password
+     * @param username
+     *            the username
+     * @param password
+     *            the password
      */
     public void login(final String username, final String password) {
         loginServlet.login(username, password, new AsyncCallback<Boolean>() {
@@ -82,25 +83,35 @@ public class Login implements EntryPoint {
                 final Button closeButton = new Button("Close");
                 dialogVPanel.add(closeButton);
                 dialogBox.setWidget(dialogVPanel);
-                
+
                 closeButton.addClickHandler(new ClickHandler() {
                     public void onClick(ClickEvent event) {
                         dialogBox.hide();
                     }
                 });
-                
+
                 dialogBox.center();
                 closeButton.setFocus(true);
             }
         });
     }
 
+    /**
+     * Plain java method, to test.
+     * 
+     * @return 1
+     */
     public int methodToTestInJava() {
-        return  1;
+        return 1;
     }
-    
+
+    /**
+     * Native javascript method, to test.
+     * 
+     * @return 1
+     */
     public native int methodToTestInJS() /*-{
         return 1;
     }-*/;
-    
+
 }

@@ -18,7 +18,7 @@
  *  Jérôme Blanchard / INRIA
  * Christophe Bouthier / INRIA
  */
-package org.qualipso.factory.ui.core.login.client.gwttests;
+package org.qualipso.factory.test.ui.core.login.gwt.gwttests;
 
 import org.qualipso.factory.ui.core.login.client.Login;
 
@@ -38,7 +38,7 @@ public class GwtTestLogin extends GWTTestCase {
      */
     @Override
     public String getModuleName() {
-        return "org.qualipso.factory.ui.core.login.Login";
+        return "org.qualipso.factory.test.ui.core.login.gwt.TestLogin";
     }
 
     /**
