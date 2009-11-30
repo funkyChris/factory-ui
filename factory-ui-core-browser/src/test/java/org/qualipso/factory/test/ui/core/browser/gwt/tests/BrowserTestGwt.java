@@ -18,45 +18,43 @@
  *  Jérôme Blanchard / INRIA
  * Christophe Bouthier / INRIA
  */
-package org.qualipso.factory.test.ui.core.login.gwt.tests;
-
-import org.qualipso.factory.ui.core.login.client.Login;
+package org.qualipso.factory.test.ui.core.browser.gwt.tests;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * Unit tests for the login interface.
+ * Unit tests for the browser interface.
  * 
  * @author <a href="mailto:christophe.bouthier@loria.fr">Christophe Bouthier</a>
- * @date 23 November 2009
+ * @date 30 November 2009
  */
-public class LoginTestGwt extends GWTTestCase {
+public class BrowserTestGwt extends GWTTestCase {
 
     /**
      * Return the name of the tested GWT Module.
+     * 
      * @see com.google.gwt.junit.client.GWTTestCase#getModuleName()
      */
     @Override
     public String getModuleName() {
-        return "org.qualipso.factory.test.ui.core.login.gwt.TestLogin";
+        return "org.qualipso.factory.test.ui.core.browser.gwt.TestBrowser";
     }
 
     /**
      * Simple test.
      */
-    public void testMethodInJS() {
-        Login loginManager = new Login();
-        assertEquals(1, loginManager.methodToTestInJS());
+    public void testDummy() {
+        assertTrue(true);
     }
-    
+
     @Override
     protected void gwtSetUp() throws Exception {
         super.gwtSetUp();
     }
-    
+
     @Override
     protected void gwtTearDown() throws Exception {
         super.gwtTearDown();
     }
-    
+
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.0-rc1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.0.0-rc1/distro-source/core/src/gwt-module.dtd">
+	<!--
+		Authors Jerome Blanchard <jayblanc@gmail.com> - Christophe Bouthier <christophe.bouthier@loria.fr>
+		Date 30 November 2009
+	-->
+<module rename-to='browser'>
+	<inherits name='com.google.gwt.user.User' />
+	<inherits name='com.google.gwt.user.theme.standard.Standard' />
+	<inherits name="com.google.gwt.uibinder.UiBinder" />
+
+	<source path='client' />
+    
+	<entry-point class='org.qualipso.factory.ui.core.browser.client.Browser' />
+    
+     <set-property name="user.agent" value="gecko" />
+</module>

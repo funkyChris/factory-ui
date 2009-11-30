@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		Authors Jerome Blanchard <jayblanc@gmail.com> - Christophe Bouthier <christophe.bouthier@loria.fr>
+		Date 30 November 2009
+	-->
+<web-fragment>
+	<servlet>
+		<description>Servlet browsing the factory naming tree through the browsing service</description>
+		<display-name>BrowserServlet</display-name>
+		<servlet-name>BrowserServlet</servlet-name>
+		<servlet-class>org.qualipso.factory.ui.core.browser.server.BrowserServletImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>BrowserServlet</servlet-name>
+		<url-pattern>/browser/browser</url-pattern>
+	</servlet-mapping>
+</web-fragment>
