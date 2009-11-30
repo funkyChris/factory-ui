@@ -33,8 +33,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jboss.security.auth.callback.UsernamePasswordHandler;
 import org.qualipso.factory.FactoryNamingConvention;
+import org.qualipso.factory.binding.InvalidPathException;
+import org.qualipso.factory.binding.PathNotFoundException;
 import org.qualipso.factory.browser.BrowserService;
 import org.qualipso.factory.browser.BrowserServiceException;
+import org.qualipso.factory.security.pep.AccessDeniedException;
 import org.qualipso.factory.ui.core.browser.client.BrowserServlet;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -84,12 +87,21 @@ public class BrowserServletImpl extends RemoteServiceServlet implements BrowserS
             return null;
         }
 
-        String[] children;
+        String[] children = null;
         try {
             children = browserService.listChildren(path);
         } catch (BrowserServiceException bse) {
             logger.error("Cannot manage to call Factory browser service. Caused by: ", bse);
             return null;
+        } catch (AccessDeniedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InvalidPathException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (PathNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
         logout();
@@ -125,12 +137,21 @@ public class BrowserServletImpl extends RemoteServiceServlet implements BrowserS
             return null;
         }
 
-        Boolean hasChildren;
+        Boolean hasChildren = null;
         try {
             hasChildren = browserService.hasChildren(path);
         } catch (BrowserServiceException bse) {
             logger.error("Cannot manage to call Factory browser service. Caused by: ", bse);
             return null;
+        } catch (AccessDeniedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InvalidPathException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (PathNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         
         logout();

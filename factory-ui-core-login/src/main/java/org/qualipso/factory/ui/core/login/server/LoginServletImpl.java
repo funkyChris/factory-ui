@@ -34,12 +34,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jboss.security.auth.callback.UsernamePasswordHandler;
 import org.qualipso.factory.FactoryNamingConvention;
+import org.qualipso.factory.binding.InvalidPathException;
+import org.qualipso.factory.binding.PathNotFoundException;
 import org.qualipso.factory.bootstrap.BootstrapService;
 import org.qualipso.factory.bootstrap.BootstrapServiceException;
 import org.qualipso.factory.browser.BrowserService;
 import org.qualipso.factory.browser.BrowserServiceException;
 import org.qualipso.factory.membership.MembershipService;
-import org.qualipso.factory.membership.MembershipServiceException;
+import org.qualipso.factory.security.pep.AccessDeniedException;
 import org.qualipso.factory.ui.core.login.client.LoginServlet;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -97,6 +99,9 @@ public class LoginServletImpl extends RemoteServiceServlet implements LoginServl
 
         // flag to check if we need to bootstrap the factory or not
         boolean needBootstrap = true;
+        
+        // changer ca, juste lancer le bootstrap, et stocker la variable
+        // sauf si ca ne passe pas (checker les exceptions)
 
         // check the application context to see if the bootstrap has already been done
         // thanks to Jerome for this piece of code
@@ -123,6 +128,15 @@ public class LoginServletImpl extends RemoteServiceServlet implements LoginServl
             } catch (BrowserServiceException be) {
                 logger.info("No bootstrap node found in the naming.");
                 needBootstrap = true;
+            } catch (AccessDeniedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (InvalidPathException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (PathNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         }
 
@@ -167,9 +181,6 @@ public class LoginServletImpl extends RemoteServiceServlet implements LoginServl
         try {
             profilePath = membership.getProfilePathForConnectedIdentifier();
             logger.info("Profile path for user " + username + ": " + profilePath);
-        } catch (MembershipServiceException e) {
-            logger.error("Cannot manage to call Factory membership service. Caused by: ", e);
-            return false;
         } catch (EJBAccessException no) {
             // login is invalid
             logger.info("Login failed for user " + username);
