@@ -23,10 +23,11 @@
                 <version>1.2-SNAPSHOT</version>
                 <configuration>
                     <servicePattern>**/client/**/*Servlet.java</servicePattern>
-                    <webappDirectory>target/classes/META-INF/resources</webappDirectory><!--
+                    <webappDirectory>target/classes/META-INF/resources</webappDirectory>
                     <disableCastChecking>true</disableCastChecking>
                     <disableClassMetadata>true</disableClassMetadata>
-                    --><style>DETAILED</style>
+                    <style>OBF</style>
+                    <!--<style>DETAILED</style>-->
                     <runTarget>index.html</runTarget>
                 </configuration>
                 <executions>

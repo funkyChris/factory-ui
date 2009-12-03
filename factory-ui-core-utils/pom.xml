@@ -22,10 +22,11 @@
                 <artifactId>gwt-maven-plugin</artifactId>
                 <version>1.2-SNAPSHOT</version>
                 <configuration>
-                    <webappDirectory>target/classes/META-INF/resources</webappDirectory><!--
+                    <webappDirectory>target/classes/META-INF/resources</webappDirectory>
                     <disableCastChecking>true</disableCastChecking>
                     <disableClassMetadata>true</disableClassMetadata>
-                    --><style>DETAILED</style>
+                    <style>OBF</style>
+                    <!--<style>DETAILED</style>-->
                 </configuration>
                 <executions>
                     <execution>
