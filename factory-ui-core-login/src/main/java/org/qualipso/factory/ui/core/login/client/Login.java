@@ -20,6 +20,8 @@
  */
 package org.qualipso.factory.ui.core.login.client;
 
+import org.qualipso.factory.ui.core.utils.client.Utils;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -68,6 +70,7 @@ public class Login implements EntryPoint {
                 if (logged) {
                     RootPanel.get("loginComponent").remove(loginPanel);
                     RootPanel.get("loginComponent").add(new Label("Welcome, " + username));
+                    Utils.refreshAllRegisteredWidgets();
                     return;
                 }
                 loginPanel.error("Login failed.");

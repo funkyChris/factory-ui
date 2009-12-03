@@ -23,10 +23,10 @@
                 <version>1.2-SNAPSHOT</version>
                 <configuration>
                     <servicePattern>**/client/**/*Servlet.java</servicePattern>
-                    <webappDirectory>target/classes/META-INF/resources</webappDirectory>
+                    <webappDirectory>target/classes/META-INF/resources</webappDirectory><!--
                     <disableCastChecking>true</disableCastChecking>
                     <disableClassMetadata>true</disableClassMetadata>
-                    <style>PRETTY</style>
+                    --><style>DETAILED</style>
                     <runTarget>index.html</runTarget>
                 </configuration>
                 <executions>
@@ -169,6 +169,12 @@
             <groupId>org.qualipso</groupId>
             <artifactId>factory-core</artifactId>
             <version>0.4.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.qualipso</groupId>
+            <artifactId>factory-ui-core-utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

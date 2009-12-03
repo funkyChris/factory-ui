@@ -20,6 +20,10 @@
  */
 package org.qualipso.factory.ui.core.browser.client;
 
+import org.qualipso.factory.ui.core.utils.client.FactoryWidget;
+import org.qualipso.factory.ui.core.utils.client.Registerer;
+import org.qualipso.factory.ui.core.utils.client.Utils;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -32,7 +36,7 @@ import com.google.gwt.user.client.ui.TreeItem;
  * @author <a href="mailto:christophe.bouthier@loria.fr">Christophe Bouthier</a>
  * @date 30 November 2009
  */
-public class Browser implements EntryPoint {
+public class Browser  implements EntryPoint, FactoryWidget {
 
     private final BrowserServletAsync browserServlet = GWT.create(BrowserServlet.class);
 
@@ -48,10 +52,18 @@ public class Browser implements EntryPoint {
     public void onModuleLoad() {
         browserPanel = new BrowserPanel(this);
         RootPanel.get("browserComponent").add(browserPanel);
-        refreshTree();
+        refresh();
+        Utils.registerWidget("browser", this);
+        registerRefresh(Utils.getRegistererInstance(), this);
     }
+    
+    private final native void registerRefresh(Registerer registerer, Browser browser) /*-{
+        registerer.widgets["browser"].refresh = function() {
+            return browser.@org.qualipso.factory.ui.core.browser.client.Browser::refresh()();
+        }
+    }-*/;
 
-    private void refreshTree() {
+    public void refresh() {
         rootNode = new TreeItem("/");
         getChildrenOf("/", rootNode);
         browserPanel.refresh(rootNode);
@@ -66,7 +78,7 @@ public class Browser implements EntryPoint {
 
             @Override
             public void onSuccess(Boolean hasChildren) {
-                if (hasChildren) {
+                if ((hasChildren != null) && (hasChildren)) {
                     buildChildrenOf(path, node);
                 }
             }
@@ -78,12 +90,15 @@ public class Browser implements EntryPoint {
 
             @Override
             public void onFailure(Throwable exception) {
+                GWT.log("something wrong happened", null);
                 return;
             }
 
             @Override
             public void onSuccess(String[] children) {
-                buildRecursivelyChildren(node, path, children);
+                if (children != null) {
+                    buildRecursivelyChildren(node, path, children);
+                }
             }
         });
     }

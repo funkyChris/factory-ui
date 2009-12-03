@@ -8,7 +8,8 @@
 	<inherits name='com.google.gwt.user.User' />
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 	<inherits name="com.google.gwt.uibinder.UiBinder" />
-
+    <inherits name='org.qualipso.factory.ui.core.utils.Utils' />
+    
 	<source path='client' />
     
 	<entry-point class='org.qualipso.factory.ui.core.login.client.Login' />

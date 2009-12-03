@@ -93,15 +93,15 @@ public class BrowserServletImpl extends RemoteServiceServlet implements BrowserS
         } catch (BrowserServiceException bse) {
             logger.error("Cannot manage to call Factory browser service. Caused by: ", bse);
             return null;
-        } catch (AccessDeniedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InvalidPathException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (PathNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } catch (AccessDeniedException ade) {
+            logger.error("Access denied for path " + path );
+            return null;
+        } catch (InvalidPathException ipe) {
+            logger.error("Path " + path + " is invalid.");
+            return null;
+        } catch (PathNotFoundException pnfe) {
+            logger.error("Path " + path + " cannot be found.");
+            return null;
         }
 
         logout();
@@ -143,15 +143,15 @@ public class BrowserServletImpl extends RemoteServiceServlet implements BrowserS
         } catch (BrowserServiceException bse) {
             logger.error("Cannot manage to call Factory browser service. Caused by: ", bse);
             return null;
-        } catch (AccessDeniedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InvalidPathException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (PathNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } catch (AccessDeniedException ade) {
+            logger.error("Access denied for path " + path );
+            return null;
+        } catch (InvalidPathException ipe) {
+            logger.error("Path " + path + " is invalid.");
+            return null;
+        } catch (PathNotFoundException pnfe) {
+            logger.error("Path " + path + " cannot be found.");
+            return null;
         }
         
         logout();
@@ -160,8 +160,8 @@ public class BrowserServletImpl extends RemoteServiceServlet implements BrowserS
     }
 
     private void login() {
-        String username;
-        String password;
+        String username  = null;
+        String password = null;
 
         // check to see if there's a session existing
         HttpSession session = getThreadLocalRequest().getSession(false);
@@ -170,25 +170,29 @@ public class BrowserServletImpl extends RemoteServiceServlet implements BrowserS
             password = (String) session.getAttribute(PASSWORD_SESSION_ATTRIBUTE);
             logger.info("Getting log info from cookie : login for user " + username);
         }
-        // DEBUG
-        else {
-            logger.info("Using debug mode, login as root");
-            username = "root";
-            password = "tagada";
-        }
+//        // DEBUG
+//        else {
+//            logger.info("Using debug mode, login as root");
+//            username = "root";
+//            password = "tagada";
+//        }
 
         // create the login context
-        try {
-            loginContext = new LoginContext("qualipso", new UsernamePasswordHandler(username, password));
-            loginContext.login();
-        } catch (LoginException le) {
-            logger.error("Cannot manage to use the login context. Caused by: ", le);
+        if ((username != null) && (password != null)) {
+            try {
+                loginContext = new LoginContext("qualipso", new UsernamePasswordHandler(username, password));
+                loginContext.login();
+            } catch (LoginException le) {
+                logger.error("Cannot manage to use the login context. Caused by: ", le);
+            }
         }
     }
 
     private void logout() {
         try {
-            loginContext.logout();
+            if (loginContext != null) {
+                loginContext.logout();
+            }
         } catch (LoginException le) {
             // just log, don't do anything else
             logger.error("Problem logging out after testing correct login. Caused by: ", le);
