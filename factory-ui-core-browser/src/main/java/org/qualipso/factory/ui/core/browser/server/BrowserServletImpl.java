@@ -33,6 +33,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jboss.security.auth.callback.UsernamePasswordHandler;
 import org.qualipso.factory.FactoryNamingConvention;
+import org.qualipso.factory.FactoryResource;
 import org.qualipso.factory.binding.InvalidPathException;
 import org.qualipso.factory.binding.PathNotFoundException;
 import org.qualipso.factory.browser.BrowserService;
@@ -159,6 +160,81 @@ public class BrowserServletImpl extends RemoteServiceServlet implements BrowserS
         return hasChildren;
     }
 
+    private FactoryResource findResource(String path) {
+        logger.info("Getting resource for path " + path);
+
+        // get the naming context for lookup factory services
+        final Context namingContext;
+        try {
+            final Properties properties = new Properties();
+            properties.put("java.naming.factory.initial", "org.jnp.interfaces.NamingContextFactory");
+            properties.put("java.naming.factory.url.pkgs", "org.jboss.naming:org.jnp.interfaces");
+            properties.put("java.naming.provider.url", "localhost:1099");
+            namingContext = new InitialContext(properties);
+        } catch (NamingException ne) {
+            logger.error("Cannot manage to access Factory through naming. Caused by: ", ne);
+            return null;
+        }
+
+        login();
+        
+        // get the browsing service
+        final BrowserService browserService;
+        try {
+            browserService = (BrowserService) namingContext.lookup(FactoryNamingConvention.getJNDINameForService(BrowserService.SERVICE_NAME));
+        } catch (NamingException ne) {
+            logger.error("Cannot manage to access Factory browser service. Caused by: ", ne);
+            return null;
+        }
+
+        FactoryResource resource = null;
+        try {
+            resource = browserService.findResource(path);
+        } catch (BrowserServiceException bse) {
+            logger.error("Cannot manage to call Factory browser service. Caused by: ", bse);
+            return null;
+        } catch (AccessDeniedException ade) {
+            logger.error("Access denied for path " + path );
+            return null;
+        } catch (InvalidPathException ipe) {
+            logger.error("Path " + path + " is invalid.");
+            return null;
+        } catch (PathNotFoundException pnfe) {
+            logger.error("Path " + path + " cannot be found.");
+            return null;
+        }
+        
+        logout();
+
+        return resource;
+    }    
+    
+    @Override
+    public String getResourceService(String path) {
+        logger.info("Getting resource service name for path " + path);
+        
+        //get the factory resource
+        FactoryResource resource = findResource(path);
+        if (resource == null) {
+            return null;
+        }
+
+        return resource.getFactoryResourceIdentifier().getService();
+    }
+
+    @Override
+    public String getResourceType(String path) {
+        logger.info("Getting resource type for path " + path);
+        
+        //get the factory resource
+        FactoryResource resource = findResource(path);
+        if (resource == null) {
+            return null;
+        }
+
+        return resource.getFactoryResourceIdentifier().getType();
+    }
+    
     private void login() {
         String username  = null;
         String password = null;
@@ -198,5 +274,7 @@ public class BrowserServletImpl extends RemoteServiceServlet implements BrowserS
             logger.error("Problem logging out after testing correct login. Caused by: ", le);
         }
     }
+
+
 
 }

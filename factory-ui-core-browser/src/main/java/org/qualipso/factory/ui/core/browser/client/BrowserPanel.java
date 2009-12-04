@@ -21,8 +21,10 @@
 package org.qualipso.factory.ui.core.browser.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
@@ -51,6 +53,11 @@ public class BrowserPanel extends Composite {
     public void refresh(TreeItem rootItem) {
         tree.removeItems();
         tree.addItem(rootItem);
+    }
+    
+    @UiHandler("tree")
+    public void onSelection(SelectionEvent<TreeItem> e) {
+        browserManager.loadResource(e.getSelectedItem().getText());
     }
  
 }

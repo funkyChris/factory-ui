@@ -2,11 +2,12 @@ package org.qualipso.factory.ui.core.utils.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.user.client.ui.Widget;
 
 public class Registerer extends JavaScriptObject {
-    
+
     protected Registerer() {
-        
+
     }
 
     public final native void registerWidget(String name, FactoryWidget widget) /*-{
@@ -35,5 +36,12 @@ public class Registerer extends JavaScriptObject {
             this.widgets[name].refresh();
         }
     }-*/;
+
+    public final native void registerService(String name) /*-{
+        this.services[name] = {};
+        this.services[name].resources = {};
+    }-*/;
+    
+   
 
 }

@@ -14,6 +14,17 @@
     <artifactId>factory-ui-core-utils</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.js</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <defaultGoal>compile</defaultGoal>
         <finalName>factory-ui-core-utils</finalName>
         <plugins>
@@ -80,6 +91,12 @@
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
             <version>${gwt.version}</version>
             <scope>provided</scope>
         </dependency>

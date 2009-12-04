@@ -20,6 +20,11 @@
  */
 package org.qualipso.factory.ui.core.utils.client;
 
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
+
 
 /**
  * Utils classes for the factor..
@@ -34,6 +39,16 @@ public class Utils {
         registerer.registerWidget(name, widget);
     }
 
+    public static void registerService(String name) {
+        Registerer registerer = getRegistererInstance();
+        registerer.registerService(name);
+    }
+    
+    
+    public static void loadService(String name) {
+        addScript(name + "/" + name + ".nocache.js");
+    }
+    
     public static FactoryWidget getRegisteredWidget(String name) {
         Registerer registerer = getRegistererInstance();
         return registerer.getRegisteredWidget(name);
@@ -49,9 +64,29 @@ public class Utils {
         if (registerer == null) {
             registerer = {};
             registerer.widgets = {};
+            registerer.services =  {};
             $wnd.qf_registerer = registerer;
         }
         return registerer;
     }-*/;
 
+    private static void addScript(String url) {
+        Element e = DOM.createElement("script");
+        e.setAttribute("type", "text/javascript");
+        e.setAttribute("language", "JavaScript");
+        e.setAttribute("src", url);
+        DOM.appendChild(RootPanel.getBodyElement(), e);
+      }
+
+    public static void registerServiceResource(String string, String string2) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public static Widget getRegisteredServiceResourceWidget(String service, String type) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    
 }

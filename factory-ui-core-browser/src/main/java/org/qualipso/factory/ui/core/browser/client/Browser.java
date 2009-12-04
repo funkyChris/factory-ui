@@ -29,6 +29,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TreeItem;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * User interface for the Browser core service. Provide a tree displaying the content of the naming tree, using the Browser servlet to access the factory.
@@ -73,7 +74,7 @@ public class Browser  implements EntryPoint, FactoryWidget {
         browserServlet.hasChildren(path, new AsyncCallback<Boolean>() {
             @Override
             public void onFailure(Throwable exception) {
-                return;
+                GWT.log("something wrong happened", exception);
             }
 
             @Override
@@ -90,8 +91,7 @@ public class Browser  implements EntryPoint, FactoryWidget {
 
             @Override
             public void onFailure(Throwable exception) {
-                GWT.log("something wrong happened", null);
-                return;
+                GWT.log("something wrong happened", exception);
             }
 
             @Override
@@ -109,6 +109,44 @@ public class Browser  implements EntryPoint, FactoryWidget {
             node.addItem(nodeChildren);
             getChildrenOf(children[i], nodeChildren);
         }
+    }
+
+    public void loadResource(final String path) {
+        browserServlet.getResourceService(path, new AsyncCallback<String>() {
+
+            @Override
+            public void onFailure(Throwable exception) {
+                GWT.log("something wrong happened", exception);
+            }
+
+            @Override
+            public void onSuccess(String service) {
+                GWT.log("resource service " + service + " for path " + path, null);
+                loadServiceForResource(service, path);
+            }
+        });
+    }
+
+    protected void loadServiceForResource(final String service, final String path) {
+        Utils.loadService(service);
+        browserServlet.getResourceType(path, new AsyncCallback<String>() {
+
+            @Override
+            public void onFailure(Throwable exception) {
+                GWT.log("something wrong happened", exception);
+            }
+
+            @Override
+            public void onSuccess(String type) {
+                GWT.log("resource type " + type + " for path " + path, null);
+                loadResource(service, type, path);
+            }
+        });
+    }
+
+    protected void loadResource(String service, String type, String path) {
+        Widget widget = Utils.getRegisteredServiceResourceWidget(service, type);
+        RootPanel.get("itemComponent").add(widget);
     }
 
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		Authors Jerome Blanchard <jayblanc@gmail.com> - Christophe Bouthier <christophe.bouthier@loria.fr>
+		Date 4 December 2009
+	-->
+<web-fragment>
+	<servlet>
+		<description>Servlet browsing the factory naming tree through the browsing service</description>
+		<display-name>CoreServlet</display-name>
+		<servlet-name>CoreServlet</servlet-name>
+		<servlet-class>org.qualipso.factory.ui.core.core.server.CoreServletImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CoreServlet</servlet-name>
+		<url-pattern>/core/core</url-pattern>
+	</servlet-mapping>
+</web-fragment>

@@ -18,28 +18,18 @@
  *  Jérôme Blanchard / INRIA
  * Christophe Bouthier / INRIA
  */
-package org.qualipso.factory.ui.core.browser.client;
-
-import org.qualipso.factory.FactoryResource;
+package org.qualipso.factory.ui.core.core.client;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
- * Interface of the server part for the Browser core service.
- * Access the Factory browsing service to browse through the naming tree. 
+ * Interface of the server part for the Browser core service. Access the Factory browsing service to browse through the naming tree.
  * 
  * @author <a href="mailto:christophe.bouthier@loria.fr">Christophe Bouthier</a>
- * @date 30 November 2009
+ * @date 4 December 2009
  */
-@RemoteServiceRelativePath("browser")
-public interface BrowserServlet extends RemoteService {
-    
-      String[] getChildren(String path);
-    
-      Boolean hasChildren(String path);
-      
-      String getResourceType(String path);
-      
-      String getResourceService(String path);
+@RemoteServiceRelativePath("core")
+public interface CoreServlet extends RemoteService {
+
 }
