@@ -18,7 +18,7 @@
  *  Jérôme Blanchard / INRIA
  * Christophe Bouthier / INRIA
  */
-package org.qualipso.factory.ui.core.core.client;
+package org.qualipso.factory.ui.core.membership.client;
 
 import org.qualipso.factory.ui.core.utils.client.Registerer;
 import org.qualipso.factory.ui.core.utils.client.Utils;
@@ -32,9 +32,9 @@ import com.google.gwt.user.client.ui.RootPanel;
  * User interface for the Browser core service. Provide a tree displaying the content of the naming tree, using the Browser servlet to access the factory.
  * 
  * @author <a href="mailto:christophe.bouthier@loria.fr">Christophe Bouthier</a>
- * @date 4 December 2009
+ * @date 7 December 2009
  */
-public class Core implements EntryPoint {
+public class Membership implements EntryPoint {
 
     /**
      * Entry point, method called when the module is loaded. Create the tree.
@@ -43,30 +43,21 @@ public class Core implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-        GWT.log("Loaded Core", null);
+        GWT.log("Loaded Membership", null);
         registerResourceWidgets(Utils.getRegistererInstance(), this);
     }
 
-    private final native void registerResourceWidgets(Registerer registerer, Core core) /*-{
-        registerer.services["core"] = {};
-        registerer.services["core"].resources = {};
-        registerer.services["core"].resources["file"] = {};
-        registerer.services["core"].resources["folder"] = {};
-        registerer.services["core"].resources["file"].load = function(slot, data) {
-            return core.@org.qualipso.factory.ui.core.core.client.Core::loadFileWidget(Ljava/lang/String;Ljava/lang/String;)(slot, data);
-        }
-        registerer.services["core"].resources["folder"].load = function(slot, data) {
-            return core.@org.qualipso.factory.ui.core.core.client.Core::loadFolderWidget(Ljava/lang/String;Ljava/lang/String;)(slot, data);
+    private final native void registerResourceWidgets(Registerer registerer, Membership core) /*-{
+        registerer.services["membership"] = {};
+        registerer.services["membership"].resources = {};
+        registerer.services["membership"].resources["profile"] = {};
+        registerer.services["membership"].resources["profile"].load = function(slot, data) {
+            return core.@org.qualipso.factory.ui.core.membership.client.Membership::loadProfileWidget(Ljava/lang/String;Ljava/lang/String;)(slot, data);
         }
     }-*/;
 
-    public void loadFileWidget(String slot, String data) {
-        Label l = new Label("File: " + data);
-        RootPanel.get(slot).add(l);
-    }
-
-    public void loadFolderWidget(String slot, String data) {
-        Label l = new Label("Folder: " + data);
+    public void loadProfileWidget(String slot, String data) {
+        Label l = new Label("Profile: " + data);
         RootPanel.get(slot).add(l);
     }
 

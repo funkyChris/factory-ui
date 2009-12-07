@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		Authors Jerome Blanchard <jayblanc@gmail.com> - Christophe Bouthier <christophe.bouthier@loria.fr>
+		Date 7 December 2009
+	-->
+<web-fragment>
+	<servlet>
+		<description>Servlet</description>
+		<display-name>MembershipServlet</display-name>
+		<servlet-name>MembershipServlet</servlet-name>
+		<servlet-class>org.qualipso.factory.ui.core.membership.server.MembershipServletImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>MembershipServlet</servlet-name>
+		<url-pattern>/membership/membership</url-pattern>
+	</servlet-mapping>
+</web-fragment>
