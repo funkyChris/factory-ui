@@ -23,8 +23,6 @@ package org.qualipso.factory.ui.core.utils.client;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
-
 
 /**
  * Utils classes for the factor..
@@ -33,31 +31,6 @@ import com.google.gwt.user.client.ui.Widget;
  * @date 3 December 2009
  */
 public class Utils {
-
-    public static void registerWidget(String name, FactoryWidget widget) {
-        Registerer registerer = getRegistererInstance();
-        registerer.registerWidget(name, widget);
-    }
-
-    public static void registerService(String name) {
-        Registerer registerer = getRegistererInstance();
-        registerer.registerService(name);
-    }
-    
-    
-    public static void loadService(String name) {
-        addScript(name + "/" + name + ".nocache.js");
-    }
-    
-    public static FactoryWidget getRegisteredWidget(String name) {
-        Registerer registerer = getRegistererInstance();
-        return registerer.getRegisteredWidget(name);
-    }
-
-    public static void refreshAllRegisteredWidgets() {
-        Registerer registerer = getRegistererInstance();
-        registerer.refreshAllRegisteredWidgets();
-    }
 
     public final static native Registerer getRegistererInstance() /*-{
         var registerer = $wnd.qf_registerer;
@@ -69,6 +42,15 @@ public class Utils {
         }
         return registerer;
     }-*/;
+    
+    public static void refreshAllRegisteredWidgets() {
+        Registerer registerer = getRegistererInstance();
+        registerer.refreshAllRegisteredWidgets();
+    }
+
+    public static void loadService(String name) {
+        addScript(name + "/" + name + ".nocache.js");
+    }
 
     private static void addScript(String url) {
         Element e = DOM.createElement("script");
@@ -76,17 +58,10 @@ public class Utils {
         e.setAttribute("language", "JavaScript");
         e.setAttribute("src", url);
         DOM.appendChild(RootPanel.getBodyElement(), e);
-      }
-
-    public static void registerServiceResource(String string, String string2) {
-        // TODO Auto-generated method stub
-        
     }
 
-    public static Widget getRegisteredServiceResourceWidget(String service, String type) {
-        // TODO Auto-generated method stub
-        return null;
+    public static void loadWidgetForResourceAndService(String service, String resource, String path, String slot) {
+        Registerer registerer = getRegistererInstance();
+        registerer.loadWidgetForResourceAndService(service, resource, path, slot);
     }
-
-    
 }

@@ -25,7 +25,8 @@ import org.qualipso.factory.ui.core.utils.client.Utils;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * User interface for the Browser core service. Provide a tree displaying the content of the naming tree, using the Browser servlet to access the factory.
@@ -42,29 +43,23 @@ public class Core implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-        Utils.registerService("core");
-        Utils.registerServiceResource("core", "folder");
-        Utils.registerServiceResource("core", "file");
-        
-        registerResourceWidgets(Utils.getRegistererInstance(), this);
-        
         GWT.log("Loaded Core", null);
+        registerResourceWidgets(Utils.getRegistererInstance(), this);
     }
-    
+
     private final native void registerResourceWidgets(Registerer registerer, Core core) /*-{
-        registerer.service["core"].resources["file"].widget = function() {
-            return core.@org.qualipso.factory.ui.core.core.client.Core::getFileWidget()();
-        }
-        registerer.service["core"].resources["folder"].widget = function() {
-            return core.@org.qualipso.factory.ui.core.core.client.Core::getFolderWidget()();
+        registerer.services["core"] = {};
+        registerer.services["core"].resources = {};
+        registerer.services["core"].resources["file"] = {};
+        registerer.services["core"].resources["folder"] = {};
+        registerer.services["core"].resources["file"].load = function(slot, data) {
+            return core.@org.qualipso.factory.ui.core.core.client.Core::loadFileWidget(Ljava/lang/String;Ljava/lang/String;)(slot, data);
         }
     }-*/;
 
-    public Widget getFileWidget() {
-        return null;
+    public void loadFileWidget(String slot, String data) {
+        Label l = new Label("File: " + data);
+        RootPanel.get(slot).add(l);
     }
-    
-    public Widget getFolderWidget() {
-        return null;
-    }
+
 }
